@@ -45,8 +45,6 @@ for char in sorted(content):
 
 itos = {value: key for key, value in stoi.items()}
 
-
-
 def generate_text(model, inp, itos, stoi, block_size, max_len):
 
     context = [0] * block_size
