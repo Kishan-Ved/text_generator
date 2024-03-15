@@ -43,13 +43,8 @@ for char in sorted(content):
         stoi[char] = i
         i+=1
 
-# Print the dictionary
-# print(stoi)
-
 itos = {value: key for key, value in stoi.items()}
 
-# Print the interchanged dictionary
-# print(itos)
 
 
 def generate_text(model, inp, itos, stoi, block_size, max_len):
