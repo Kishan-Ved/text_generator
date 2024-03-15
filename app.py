@@ -18,7 +18,7 @@ st.sidebar.write("Here, the intension is not to generate meaningful sentences, w
 
 st.sidebar.write("This model was trained on a simple 600 KB text corpus titled: 'Gulliver's Travels'")
 
-no_of_chars = st.slider("Number of characters to be generated", 100, 2000, 1000)
+no_of_chars = st.slider("Number of characters to be generated", 100, 2000, 400)
 
 
 # Open the file in read mode
@@ -107,11 +107,11 @@ class NextChar(nn.Module):
   
 # Embedding layer for the context
 
-emb_dim = 4
+emb_dim = 10
 emb = torch.nn.Embedding(len(stoi), emb_dim)
 
 block_size = 120
-model = NextChar(block_size, len(stoi), emb_dim, 500, 100).to(device)
+model = NextChar(block_size, len(stoi), emb_dim, 500, 300).to(device)
 model = torch.compile(model)
 
 inp = st.text_input("Enter text", placeholder="Enter valid English text. You can also leave this blank.")
@@ -120,7 +120,7 @@ btn = st.button("Generate")
 if btn:
     st.subheader("Seed Text")
     type_text(inp)
-    model.load_state_dict(torch.load("gt_eng_model_upper_two_hid_layer.pth", map_location = device))
+    model.load_state_dict(torch.load("gt_eng_model_upper_two_hid_layer_emb10.pth", map_location = device))
     gen_txt = generate_text(model, inp, itos, stoi, block_size, no_of_chars)
     st.subheader("Generated Text")
     print(gen_txt)
