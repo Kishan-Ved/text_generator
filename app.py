@@ -103,7 +103,7 @@ class NextChar(nn.Module):
 # emb_dim = 10
 emb_dim = st.selectbox(
   'Select embedding size',
-  (1,2,5,10,15,30,50,100))
+  (1,2,5,10,15,30,50,100), index=4)
 emb = torch.nn.Embedding(len(stoi), emb_dim)
 
 block_size = 15
