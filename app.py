@@ -100,10 +100,13 @@ class NextChar(nn.Module):
   
 # Embedding layer for the context
 
-emb_dim = 10
+# emb_dim = 10
+emb_dim = st.selectbox(
+  'Select embedding size',
+  (1,2,5,10,15,30,50,100))
 emb = torch.nn.Embedding(len(stoi), emb_dim)
 
-block_size = 120
+block_size = 15
 model = NextChar(block_size, len(stoi), emb_dim, 500, 300).to(device)
 model = torch.compile(model)
 
@@ -113,8 +116,8 @@ btn = st.button("Generate")
 if btn:
     st.subheader("Seed Text")
     type_text(inp)
-    model.load_state_dict(torch.load("gt_eng_model_upper_two_hid_layer_emb10.pth", map_location = device))
+    model.load_state_dict(torch.load("gt_eng_model_upper_two_hid_layer_emb"+str(emb_dim)+"_block_size_small.pth", map_location = device))
     gen_txt = generate_text(model, inp, itos, stoi, block_size, no_of_chars)
     st.subheader("Generated Text")
-    print(gen_txt)
-    type_text(inp+" "+gen_txt)
+    print(inp+gen_txt)
+    type_text(inp+gen_txt)
