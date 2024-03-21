@@ -108,7 +108,7 @@ emb = torch.nn.Embedding(len(stoi), emb_dim)
 
 # block_size = 15
 block_size = st.selectbox(
-  'Select block_size size',
+  'Select block size',
   (15,50), index=0)
 emb = torch.nn.Embedding(len(stoi), emb_dim)
 model = NextChar(block_size, len(stoi), emb_dim, 500, 300).to(device)
