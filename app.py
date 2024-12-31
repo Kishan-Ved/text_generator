@@ -95,8 +95,7 @@ class NextChar(nn.Module):
     x = self.emb(x)
     x = x.view(x.shape[0], -1)
     x = torch.sin(self.lin1(x)) # Activation function : change this
-    x = torch.sin(self.lin2(x))
-    x = self.lin3(x)
+    x = self.lin2(x)
     return x
   
 # Embedding layer for the context
